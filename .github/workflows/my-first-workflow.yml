@@ -1,0 +1,33 @@
+name: My First Workflow
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+      - new-feature
+  schedule:
+    - cron: '0 5 * * 1-5'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Check out repository
+      uses: actions/checkout@v4
+
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: latest
+      
+    - name: Run custom action
+      uses: lxa0429/my-custom-action@main
+
+    - name: Print a message
+      run: echo "Hello, world with 4th new feature!"
